@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		221DE25E15D6222400BF3424 /* SampleService.m in Sources */ = {isa = PBXBuildFile; fileRef = 221DE25D15D6222400BF3424 /* SampleService.m */; };
+		221DE26115D6223400BF3424 /* SampleClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 221DE26015D6223400BF3424 /* SampleClient.m */; };
+		221DE26415D6224F00BF3424 /* SampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 221DE26315D6224F00BF3424 /* SampleViewController.m */; };
 		22F48DD915A34F0C006CB8AE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F48DD815A34F0C006CB8AE /* UIKit.framework */; };
 		22F48DDB15A34F0C006CB8AE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F48DDA15A34F0C006CB8AE /* Foundation.framework */; };
 		22F48DDD15A34F0C006CB8AE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F48DDC15A34F0C006CB8AE /* CoreGraphics.framework */; };
@@ -16,13 +19,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		221DE25A15D621C500BF3424 /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
+		221DE25C15D6222400BF3424 /* SampleService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleService.h; sourceTree = "<group>"; };
+		221DE25D15D6222400BF3424 /* SampleService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleService.m; sourceTree = "<group>"; };
+		221DE25F15D6223400BF3424 /* SampleClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleClient.h; sourceTree = "<group>"; };
+		221DE26015D6223400BF3424 /* SampleClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleClient.m; sourceTree = "<group>"; };
+		221DE26215D6224F00BF3424 /* SampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleViewController.h; sourceTree = "<group>"; };
+		221DE26315D6224F00BF3424 /* SampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleViewController.m; sourceTree = "<group>"; };
 		22F48DD415A34F0C006CB8AE /* CBSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CBSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22F48DD815A34F0C006CB8AE /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		22F48DDA15A34F0C006CB8AE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		22F48DDC15A34F0C006CB8AE /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		22F48DE015A34F0C006CB8AE /* CBSample-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CBSample-Info.plist"; sourceTree = "<group>"; };
+		22F48DE015A34F0C006CB8AE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info.plist"; sourceTree = "<group>"; };
 		22F48DE415A34F0C006CB8AE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		22F48DE615A34F0C006CB8AE /* CBSample-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CBSample-Prefix.pch"; sourceTree = "<group>"; };
+		22F48DE615A34F0C006CB8AE /* Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Prefix.pch"; sourceTree = "<group>"; };
 		22F48DE715A34F0C006CB8AE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		22F48DE815A34F0C006CB8AE /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		22F48DF415A3532D006CB8AE /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
@@ -74,8 +84,15 @@
 		22F48DDE15A34F0C006CB8AE /* CBSample */ = {
 			isa = PBXGroup;
 			children = (
+				221DE25A15D621C500BF3424 /* Common.h */,
 				22F48DE715A34F0C006CB8AE /* AppDelegate.h */,
 				22F48DE815A34F0C006CB8AE /* AppDelegate.m */,
+				221DE25C15D6222400BF3424 /* SampleService.h */,
+				221DE25D15D6222400BF3424 /* SampleService.m */,
+				221DE25F15D6223400BF3424 /* SampleClient.h */,
+				221DE26015D6223400BF3424 /* SampleClient.m */,
+				221DE26215D6224F00BF3424 /* SampleViewController.h */,
+				221DE26315D6224F00BF3424 /* SampleViewController.m */,
 				22F48DDF15A34F0C006CB8AE /* Supporting Files */,
 			);
 			path = CBSample;
@@ -85,8 +102,8 @@
 			isa = PBXGroup;
 			children = (
 				22F48DE415A34F0C006CB8AE /* main.m */,
-				22F48DE015A34F0C006CB8AE /* CBSample-Info.plist */,
-				22F48DE615A34F0C006CB8AE /* CBSample-Prefix.pch */,
+				22F48DE015A34F0C006CB8AE /* Info.plist */,
+				22F48DE615A34F0C006CB8AE /* Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -154,6 +171,9 @@
 			files = (
 				22F48DE515A34F0C006CB8AE /* main.m in Sources */,
 				22F48DE915A34F0C006CB8AE /* AppDelegate.m in Sources */,
+				221DE25E15D6222400BF3424 /* SampleService.m in Sources */,
+				221DE26115D6223400BF3424 /* SampleClient.m in Sources */,
+				221DE26415D6224F00BF3424 /* SampleViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -211,8 +231,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "CBSample/CBSample-Prefix.pch";
-				INFOPLIST_FILE = "CBSample/CBSample-Info.plist";
+				GCC_PREFIX_HEADER = "CBSample/Prefix.pch";
+				INFOPLIST_FILE = "CBSample/Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -222,8 +242,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "CBSample/CBSample-Prefix.pch";
-				INFOPLIST_FILE = "CBSample/CBSample-Info.plist";
+				GCC_PREFIX_HEADER = "CBSample/Prefix.pch";
+				INFOPLIST_FILE = "CBSample/Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

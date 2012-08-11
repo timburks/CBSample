@@ -1,6 +1,5 @@
 //
 //  AppDelegate.h
-//  CBSample
 //
 //  Created by Tim Burks on 7/3/12.
 //  Copyright (c) 2012 Tim Burks. All rights reserved.
