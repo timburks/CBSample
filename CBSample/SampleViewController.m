@@ -52,7 +52,6 @@ UITextView *gTextView;
     [self.view addSubview:self.textView];
     
     gTextView = self.textView;
-    
 }
 
 - (void) startService:(id) sender

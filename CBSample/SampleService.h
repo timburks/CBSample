@@ -5,8 +5,6 @@
 //  Copyright (c) 2012 Tim Burks. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
 @interface SampleService : NSObject
 
 @end

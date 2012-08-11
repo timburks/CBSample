@@ -9,6 +9,7 @@
 #import "Common.h"
 
 @interface SampleClient () <CBCentralManagerDelegate, CBPeripheralDelegate>
+
 @property (nonatomic, strong) CBCentralManager *manager;
 @property (nonatomic, strong) CBPeripheral *peripheral;
 @property (nonatomic, strong) CBCharacteristic *characteristic;
@@ -342,36 +343,36 @@ didDiscoverCharacteristicsForService:(CBService *)service
     NSLog(@"peripheral:%@ didDiscoverCharacteristicsForService:%@ error:%@",
           peripheral, service, [error localizedDescription]);
     
-    if (error)
-    {
+    if (error) {
         NSLog(@"Discovered characteristics for %@ with error: %@",
               service.UUID, [error localizedDescription]);
         return;
     }
     
-    if([service.UUID isEqual:[CBUUID UUIDWithString:SAMPLE_SERVICE]])
-    {
-        for (CBCharacteristic * characteristic in service.characteristics)
-        {
+    if([service.UUID isEqual:[CBUUID UUIDWithString:SAMPLE_SERVICE]]) {
+        for (CBCharacteristic *characteristic in service.characteristics) {
             NSLog(@"discovered characteristic %@", characteristic.UUID);
-            if([characteristic.UUID isEqual:[CBUUID UUIDWithString:SAMPLE_CHARACTERISTIC]])
-            {
-                NSLog(@"Found a Sample Characteristic");
+            if([characteristic.UUID isEqual:[CBUUID UUIDWithString:NOTIFY_CHARACTERISTIC]]) {
+                NSLog(@"Found Notify Characteristic %@", characteristic);
                 self.characteristic = characteristic;
                 [self.peripheral setNotifyValue:YES forCharacteristic:characteristic];
+            }
+            
+            else if([characteristic.UUID isEqual:[CBUUID UUIDWithString:WRITE_CHARACTERISTIC]]) {
+                NSLog(@"Found Writable Characteristic %@", characteristic);
+                [self.peripheral writeValue:[@"hello" dataUsingEncoding:NSUTF8StringEncoding]
+                          forCharacteristic:characteristic
+                                       type:CBCharacteristicWriteWithResponse];
             }
         }
     }
     
-    else if ( [service.UUID isEqual:[CBUUID UUIDWithString:CBUUIDGenericAccessProfileString]] )
-    {
-        for (CBCharacteristic *characteristic in service.characteristics)
-        {
+    else if ([service.UUID isEqual:[CBUUID UUIDWithString:CBUUIDGenericAccessProfileString]]) {
+        for (CBCharacteristic *characteristic in service.characteristics) {
             NSLog(@"discovered generic characteristic %@", characteristic.UUID);
             
             /* Read device name */
-            if([characteristic.UUID isEqual:[CBUUID UUIDWithString:CBUUIDDeviceNameString]])
-            {
+            if([characteristic.UUID isEqual:[CBUUID UUIDWithString:CBUUIDDeviceNameString]]) {
                 [self.peripheral readValueForCharacteristic:characteristic];
                 NSLog(@"Found a Device Name Characteristic - Read device name");
             }
@@ -380,7 +381,6 @@ didDiscoverCharacteristicsForService:(CBService *)service
     
     else {
         NSLog(@"unknown service discovery %@", service.UUID);
-        
     }
 }
 
@@ -406,7 +406,7 @@ didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic
         return;
     }
     
-    if([characteristic.UUID isEqual:[CBUUID UUIDWithString:SAMPLE_CHARACTERISTIC]]) {
+    if([characteristic.UUID isEqual:[CBUUID UUIDWithString:NOTIFY_CHARACTERISTIC]]) {
         NSString *chunk = [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];
         NSLog(@"chunk = %@", chunk);
         
@@ -506,11 +506,6 @@ didUpdateValueForDescriptor:(CBDescriptor *)descriptor
     NSLog(@"peripheral:%@ didWriteValueForDescriptor:%@ error:%@",
           peripheral, descriptor, [error description]);
 }
-
-
-
-
-
 
 /*!
  *  @method centralManager:didRetrieveConnectedPeripherals:

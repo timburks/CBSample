@@ -12,6 +12,7 @@
 @property (nonatomic, strong) CBPeripheralManager *manager;
 @property (nonatomic, strong) CBMutableService *sampleService;
 @property (nonatomic, strong) CBMutableCharacteristic *sampleCharacteristic;
+@property (nonatomic, strong) CBMutableCharacteristic *writableCharacteristic;
 @end
 
 @implementation SampleService
@@ -40,15 +41,24 @@
 - (void) setupService
 {
     self.sampleCharacteristic = [[CBMutableCharacteristic alloc]
-                                 initWithType:[CBUUID UUIDWithString:SAMPLE_CHARACTERISTIC]
+                                 initWithType:[CBUUID UUIDWithString:NOTIFY_CHARACTERISTIC]
                                  properties:CBCharacteristicPropertyNotify
                                  value:nil
                                  permissions:0];
     
+    self.writableCharacteristic = [[CBMutableCharacteristic alloc]
+                                   initWithType:[CBUUID UUIDWithString:WRITE_CHARACTERISTIC]
+                                   properties:CBCharacteristicPropertyWrite
+                                   value:nil
+                                   permissions:CBAttributePermissionsWriteable];
+    
     self.sampleService = [[CBMutableService alloc]
                           initWithType:[CBUUID UUIDWithString:SAMPLE_SERVICE]
                           primary:YES];
-    self.sampleService.characteristics = [NSArray arrayWithObject:self.sampleCharacteristic];
+    self.sampleService.characteristics = [NSArray arrayWithObjects:
+                                          self.sampleCharacteristic,
+                                          self.writableCharacteristic,
+                                          nil];
     
     [self.manager addService:self.sampleService];
 }
@@ -88,6 +98,8 @@ static int count = 0;
 }
 
 - (void) sendChunks {
+    NSLog(@"sending from service %@", [self.sampleService description]);
+    
     NSData *nextChunk = [self currentChunk];
     while (nextChunk) {
         NSLog(@"sending chunk %@", [[NSString alloc] initWithData:nextChunk encoding:NSUTF8StringEncoding]);
@@ -253,7 +265,7 @@ didSubscribeToCharacteristic:(CBCharacteristic *)characteristic
  */
 - (void)peripheralManager:(CBPeripheralManager *)peripheral didReceiveWriteRequests:(NSArray *)requests
 {
-    NSLog(@"peripheralManager:didReceiveWriteRequests:");
+    NSLog(@"peripheralManager:%@ didReceiveWriteRequests:%@", peripheral, requests);
     
 }
 
