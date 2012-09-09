@@ -8,6 +8,8 @@
 #import "SampleClient.h"
 #import "Common.h"
 
+#define FLASH_TIME 0.5
+
 @interface SampleClient () <CBCentralManagerDelegate, CBPeripheralDelegate>
 
 @property (nonatomic, strong) CBCentralManager *manager;
@@ -352,7 +354,6 @@ didDiscoverCharacteristicsForService:(CBService *)service
         return;
     }
     
-#ifdef DONTDOTHIS
     if([service.UUID isEqual:[CBUUID UUIDWithString:SAMPLE_SERVICE]]) {
         for (CBCharacteristic *characteristic in service.characteristics) {
             NSLog(@"discovered characteristic %@", characteristic.UUID);
@@ -382,7 +383,7 @@ didDiscoverCharacteristicsForService:(CBService *)service
             }
         }
     }
-#endif
+
     if([service.UUID isEqual:[CBUUID UUIDWithString:@"A696CB2B-F3A4-4240-B74D-C457C253857B"]]) {
         for (CBCharacteristic *characteristic in service.characteristics) {
             NSLog(@"discovered characteristic %@", characteristic.UUID);
@@ -400,7 +401,7 @@ didDiscoverCharacteristicsForService:(CBService *)service
                           forCharacteristic:self.LEDcharacteristic
                                        type:CBCharacteristicWriteWithResponse];
                 
-                [self performSelector:@selector(disableLED:) withObject:nil afterDelay:0.00];
+                [self performSelector:@selector(disableLED:) withObject:nil afterDelay:FLASH_TIME];
             }
         }
     }
@@ -417,7 +418,7 @@ didDiscoverCharacteristicsForService:(CBService *)service
     [self.peripheral writeValue:data
               forCharacteristic:self.LEDcharacteristic
                            type:CBCharacteristicWriteWithResponse];
-    [self performSelector:@selector(enableLED:) withObject:nil afterDelay:0.00];
+    [self performSelector:@selector(enableLED:) withObject:nil afterDelay:FLASH_TIME];
 }
 
 - (void) enableLED:(id) sender {
@@ -427,7 +428,7 @@ didDiscoverCharacteristicsForService:(CBService *)service
     [self.peripheral writeValue:data
               forCharacteristic:self.LEDcharacteristic
                            type:CBCharacteristicWriteWithResponse];
-    [self performSelector:@selector(disableLED:) withObject:nil afterDelay:0.00];
+    [self performSelector:@selector(disableLED:) withObject:nil afterDelay:FLASH_TIME];
 }
 
 
