@@ -66,9 +66,10 @@
 - (void) advertise
 {
     NSArray *services = [NSArray arrayWithObject:[CBUUID UUIDWithString:SAMPLE_SERVICE]];
-    NSDictionary *advertisement =
-    [NSDictionary dictionaryWithObject:services
-                                forKey:CBAdvertisementDataServiceUUIDsKey];
+    NSDictionary *advertisement = [NSDictionary dictionaryWithObjectsAndKeys:
+                                   services, CBAdvertisementDataServiceUUIDsKey,
+                                   @"CBSample", CBAdvertisementDataLocalNameKey,
+                                   nil];
     [self.manager startAdvertising:advertisement];
 }
 
@@ -86,6 +87,7 @@ static int count = 0;
 
 - (NSData *) currentChunk
 {
+    // each chunk is at most 20 bytes (WWDC 12 session 705 40:33ff)
     switch (count) {
         case 0: return [@"testing" dataUsingEncoding:NSUTF8StringEncoding];
         case 1: return [@"one" dataUsingEncoding:NSUTF8StringEncoding];

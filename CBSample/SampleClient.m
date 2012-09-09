@@ -14,6 +14,7 @@
 @property (nonatomic, strong) CBPeripheral *peripheral;
 @property (nonatomic, strong) CBCharacteristic *characteristic;
 
+@property (nonatomic, strong) CBCharacteristic *LEDcharacteristic;
 - (void) startScan;
 @end
 
@@ -73,6 +74,7 @@
 {
     NSLog(@"starting scan");
     NSArray *services = [NSArray arrayWithObject:[CBUUID UUIDWithString:SAMPLE_SERVICE]];
+    services = nil;
     [self.manager scanForPeripheralsWithServices:services options:nil];
 }
 
@@ -148,6 +150,7 @@
           peripheral,
           [advertisementData description],
           RSSI);
+    NSLog(@"peripheral.UUID: %@", peripheral.UUID);
     
     self.peripheral = peripheral;
     
@@ -200,7 +203,7 @@ didRetrievePeripherals:(NSArray *)peripherals
     NSLog(@"centralManager:didConnectPeripheral:%@", peripheral);
     [peripheral setDelegate:self];
     NSLog(@"discovering services...");
-    [peripheral discoverServices:[NSArray arrayWithObject:[CBUUID UUIDWithString:SAMPLE_SERVICE]]];
+    [peripheral discoverServices:nil]; // [NSArray arrayWithObject:[CBUUID UUIDWithString:SAMPLE_SERVICE]]];
 }
 
 /*!
@@ -305,8 +308,8 @@ didFailToConnectPeripheral:(CBPeripheral *)aPeripheral
         NSLog(@"Service found with UUID: %@", service.UUID);
         if ([service.UUID isEqual:[CBUUID UUIDWithString:SAMPLE_SERVICE]]) {
             NSLog(@"SAMPLE SERVICE FOUND");
-            [peripheral discoverCharacteristics:nil forService:service];
         }
+        [peripheral discoverCharacteristics:nil forService:service];
     }
 }
 
@@ -349,6 +352,7 @@ didDiscoverCharacteristicsForService:(CBService *)service
         return;
     }
     
+#ifdef DONTDOTHIS
     if([service.UUID isEqual:[CBUUID UUIDWithString:SAMPLE_SERVICE]]) {
         for (CBCharacteristic *characteristic in service.characteristics) {
             NSLog(@"discovered characteristic %@", characteristic.UUID);
@@ -378,11 +382,54 @@ didDiscoverCharacteristicsForService:(CBService *)service
             }
         }
     }
+#endif
+    if([service.UUID isEqual:[CBUUID UUIDWithString:@"A696CB2B-F3A4-4240-B74D-C457C253857B"]]) {
+        for (CBCharacteristic *characteristic in service.characteristics) {
+            NSLog(@"discovered characteristic %@", characteristic.UUID);
+            
+            
+            if([characteristic.UUID isEqual:[CBUUID UUIDWithString:@"AEDA780E-1CCF-4B85-BCA0-3484F295D031"]]) {
+                NSLog(@"Found Writable Characteristic %@", characteristic);
+                
+                self.LEDcharacteristic = characteristic;
+                
+                unsigned char byte = 0x0F;
+                NSData *data = [NSData dataWithBytes:&byte length:1];
+                NSLog(@"Writing %@", data);
+                [self.peripheral writeValue:data
+                          forCharacteristic:self.LEDcharacteristic
+                                       type:CBCharacteristicWriteWithResponse];
+                
+                [self performSelector:@selector(disableLED:) withObject:nil afterDelay:0.00];
+            }
+        }
+    }
     
     else {
         NSLog(@"unknown service discovery %@", service.UUID);
     }
 }
+
+- (void) disableLED:(id) sender {
+    unsigned char byte = 0x00;
+    NSData *data = [NSData dataWithBytes:&byte length:1];
+    NSLog(@"Writing %@", data);
+    [self.peripheral writeValue:data
+              forCharacteristic:self.LEDcharacteristic
+                           type:CBCharacteristicWriteWithResponse];
+    [self performSelector:@selector(enableLED:) withObject:nil afterDelay:0.00];
+}
+
+- (void) enableLED:(id) sender {
+    unsigned char byte = 0x0F;
+    NSData *data = [NSData dataWithBytes:&byte length:1];
+    NSLog(@"Writing %@", data);
+    [self.peripheral writeValue:data
+              forCharacteristic:self.LEDcharacteristic
+                           type:CBCharacteristicWriteWithResponse];
+    [self performSelector:@selector(disableLED:) withObject:nil afterDelay:0.00];
+}
+
 
 /*!
  *  @method peripheral:didUpdateValueForCharacteristic:error:
