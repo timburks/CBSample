@@ -22,7 +22,8 @@ UITextView *gTextView;
 - (void) loadView
 {
     [super loadView];
-    self.view.backgroundColor = [UIColor redColor];
+    self.view.backgroundColor = [UIColor lightGrayColor];
+    
     UIButton *serviceButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     serviceButton.frame = CGRectInset(CGRectMake(0,25,
                                                  0.5*self.view.bounds.size.width,50),
@@ -32,6 +33,7 @@ UITextView *gTextView;
             forControlEvents:UIControlEventTouchUpInside];
     serviceButton.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin+UIViewAutoresizingFlexibleWidth+UIViewAutoresizingFlexibleRightMargin;
     [self.view addSubview:serviceButton];
+    
     UIButton *clientButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     clientButton.frame = CGRectInset(CGRectMake(0.5*self.view.bounds.size.width,25,
                                                 0.5*self.view.bounds.size.width,50),

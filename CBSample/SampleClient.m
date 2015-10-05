@@ -152,7 +152,7 @@
           peripheral,
           [advertisementData description],
           RSSI);
-    NSLog(@"peripheral.UUID: %@", peripheral.UUID);
+    //NSLog(@"peripheral.UUID: %@", peripheral.UUID);
     
     self.peripheral = peripheral;
     
@@ -371,7 +371,7 @@ didDiscoverCharacteristicsForService:(CBService *)service
             }
         }
     }
-    
+#ifdef HUH
     else if ([service.UUID isEqual:[CBUUID UUIDWithString:CBUUIDGenericAccessProfileString]]) {
         for (CBCharacteristic *characteristic in service.characteristics) {
             NSLog(@"discovered generic characteristic %@", characteristic.UUID);
@@ -383,6 +383,7 @@ didDiscoverCharacteristicsForService:(CBService *)service
             }
         }
     }
+#endif
 
     if([service.UUID isEqual:[CBUUID UUIDWithString:@"A696CB2B-F3A4-4240-B74D-C457C253857B"]]) {
         for (CBCharacteristic *characteristic in service.characteristics) {

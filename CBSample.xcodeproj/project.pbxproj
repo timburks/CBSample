@@ -16,6 +16,7 @@
 		2264F90115F56F7200A38855 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 2264F8FF15F56F7200A38855 /* Credits.rtf */; };
 		2264F90415F56F7200A38855 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2264F90315F56F7200A38855 /* AppDelegate.m */; };
 		2264F90715F56F7200A38855 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2264F90515F56F7200A38855 /* MainMenu.xib */; };
+		22F22B4F1BC22D800072AC97 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22F22B4E1BC22D800072AC97 /* Launch Screen.storyboard */; };
 		22F48DD915A34F0C006CB8AE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F48DD815A34F0C006CB8AE /* UIKit.framework */; };
 		22F48DDB15A34F0C006CB8AE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F48DDA15A34F0C006CB8AE /* Foundation.framework */; };
 		22F48DDD15A34F0C006CB8AE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F48DDC15A34F0C006CB8AE /* CoreGraphics.framework */; };
@@ -45,6 +46,7 @@
 		2264F90215F56F7200A38855 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		2264F90315F56F7200A38855 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		2264F90615F56F7200A38855 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		22F22B4E1BC22D800072AC97 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		22F48DD415A34F0C006CB8AE /* CBSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CBSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22F48DD815A34F0C006CB8AE /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		22F48DDA15A34F0C006CB8AE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -168,6 +170,7 @@
 				22F48DE415A34F0C006CB8AE /* main.m */,
 				22F48DE015A34F0C006CB8AE /* Info.plist */,
 				22F48DE615A34F0C006CB8AE /* Prefix.pch */,
+				22F22B4E1BC22D800072AC97 /* Launch Screen.storyboard */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -251,6 +254,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22F22B4F1BC22D800072AC97 /* Launch Screen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -433,6 +437,7 @@
 				2264F90A15F56F7200A38855 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		22F48DCE15A34F0C006CB8AE /* Build configuration list for PBXProject "CBSample" */ = {
 			isa = XCConfigurationList;

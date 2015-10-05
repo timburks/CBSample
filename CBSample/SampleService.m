@@ -55,6 +55,7 @@
     self.sampleService = [[CBMutableService alloc]
                           initWithType:[CBUUID UUIDWithString:SAMPLE_SERVICE]
                           primary:YES];
+    
     self.sampleService.characteristics = [NSArray arrayWithObjects:
                                           self.sampleCharacteristic,
                                           self.writableCharacteristic,
